@@ -2,9 +2,13 @@ window.onload=function () {
     var headerlistNodes=document.querySelectorAll('.nav li');
     var arrowNode=document.querySelector('.arrow');
     var headerdownNodes=document.querySelectorAll('.down');
+    //获取ul
     var contentMain=document.querySelector('.content-main');
+    //获取content区域
     var content=document.querySelector('.content');
+    //求出content区域的高度
     var contentHeight=content.offsetHeight;
+    //定义
     var num=0;
     var timer=null;
     headerContent();
@@ -23,7 +27,7 @@ window.onload=function () {
          };
      };
 
-     function move(num) {
+     function move(num){
 
              for (var j = 0; j <headerdownNodes .length; j++) {
                  //默认清空所有的width都为0
@@ -34,7 +38,7 @@ window.onload=function () {
              //白色箭头跟随li进行移动
              arrowNode.style.left=headerlistNodes[num].getBoundingClientRect().left+headerlistNodes[num].offsetWidth/2-arrowNode.offsetWidth/2+'px';
 
-         contentMain.style.top=-num*contentHeight+'px';
+               contentMain.style.top=-num*contentHeight+'px';
      }
      contentM();
      function contentM() {
@@ -84,7 +88,13 @@ window.onload=function () {
             return false;
         }
     }
-
+//窗口事件
+window.onresize=function () {
+    //窗口改变小三角的位置
+      arrowNode.style.left=headerlistNodes[num].getBoundingClientRect().left+headerlistNodes[num].offsetWidth/2-arrowNode.offsetWidth/2+'px';
+    //窗口改变ul位置
+      contentMain.style.top=-num*contentHeight+'px';
+  }
 
 
 };
