@@ -42,11 +42,13 @@ img{display: block;}
     cursor: pointer;
     width: 100%;
 }
+.nav li .up{
+ color: #009EE0;
+}
 .nav li .down{
     position: absolute;
     left: 0;
     top:0;
-    color: #009EE0;
     width: 0;
     overflow: hidden;
 }
