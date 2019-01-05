@@ -96,5 +96,61 @@ window.onresize=function () {
       contentMain.style.top=-num*contentHeight+'px';
   }
 
+     //第一屏js事件
+    firstCarousel();
+    function firstCarousel() {
+        var homeCarousel=document.querySelectorAll('.home-carousel li');
+        var homePoint=document.querySelectorAll('.home-point li');
+        var homeNode=document.querySelector('.home');
+        var lastNum=0;
+        var nowNum=0;
+
+        var lastTime=0;
+        var timer=null;
+        for (var i = 0; i < homePoint.length; i++) {
+               homePoint[i].index=i;
+
+            homePoint[i].onclick=function () {
+
+                  var nowTime=Date.now();
+                  if(nowTime-lastTime<=2000) return;
+                   lastTime=nowTime;
+                  nowNum=this.index;
+                  if(nowNum==lastNum) return;
+                  if (nowNum>lastNum){
+                      homeCarousel[nowNum].className='public right-show';
+                      homeCarousel[lastNum].className='public left-hide';
+                  }else{
+                      homeCarousel[nowNum].className='public left-show';
+                      homeCarousel[lastNum].className='public right-hide';
+                  }
+                         homePoint[lastNum].className='';
+                         this.className='active';
+                          lastNum=nowNum;
+            }
+
+
+        };
+         homeNode.onmouseenter=function () {
+             clearInterval(timer)
+         };
+         homeNode.onmouseleave=autoPlay;
+        autoPlay();
+        function autoPlay() {
+            timer=setInterval(function () {
+                nowNum++;
+                if (nowNum>=4){
+                    nowNum=0;
+                }
+                homeCarousel[nowNum].className='public right-show';
+                homeCarousel[lastNum].className='public left-hide';
+                homePoint[lastNum].className='';
+                homePoint[nowNum].className='active';
+                lastNum=nowNum;
+            },2500)
+        }
+
+    }
+
 
 };

@@ -5,6 +5,10 @@ li{list-style: none;}
 img{display: block;}
 .clearfix{*zoom: 1;}
 .clearfix:after{content: "";display: block;clear: both;}
+.public{
+    color:#009ee0; font-size:80px; line-height:0.8;
+    font-weight:bold; letter-spacing:-5px;
+}
 #wrap{
     height: 100%;
     position: relative;
@@ -17,7 +21,7 @@ img{display: block;}
     margin: 0 auto;
     width: 1100px;
     height: 80px;
-    background: deeppink;
+
 }
 .logo{
     float: left;
@@ -82,16 +86,146 @@ img{display: block;}
 }
 .content-main>li{
     height: 20%;
-    background: pink;
     position: relative;
+    background-repeat: no-repeat;
 }
-.content-main li section{
+.content-main>li:nth-child(1){
+    background-image: url("../img/bg1.jpg");
+}
+.content-main>li:nth-child(2){
+    background-image: url("../img/bg2.jpg");
+}
+.content-main>li:nth-child(3){
+    background-image: url("../img/bg3.jpg");
+}
+.content-main>li:nth-child(4){
+    background-image: url("../img/bg4.jpg");
+}
+.content-main>li:nth-child(5){
+    background-image: url("../img/bg5.jpg");
+}
+.content-main section{
     width: 1100px;
     height: 520px;
-    background: yellow;
+
     position: absolute;
     left: 50%;
     margin-left: -550px;
     top: 50%;
     margin-top: -260px;
+}
+.home-carousel{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.home-carousel li{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: white;
+    text-align: center;
+    line-height: 520px;
+    visibility: hidden;
+}
+.home-carousel .active{
+    visibility: visible;
+}
+.home-carousel li:nth-child(1){
+    background-color: #dc6c5f;
+}
+.home-carousel li:nth-child(2){
+    background-color: #95dc84;
+}
+.home-carousel li:nth-child(3){
+    background-color: #64b9d2;
+}
+.home-carousel li:nth-child(4){
+    background-color: #000000;
+}
+.home-point{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.home-point li{
+    float: left;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.5);
+    margin: 2px;
+    box-shadow: 0 0 4px rgba(25,25,25,0.8);
+}
+.home-point .active{
+    background: rgba(255,255,255,1);
+}
+.home-carousel .right-show{
+    visibility: visible;
+    animation: rightShow 2s linear ;
+}
+.home-carousel .left-hide{
+    visibility: hidden;
+    animation: leftHide 2s linear;
+}
+.home-carousel .left-show{
+    visibility: visible;
+    animation: leftShow 2s linear;
+}
+.home-carousel .right-hide{
+    visibility: hidden;
+    animation: rightHide 2s linear;
+}
+
+
+
+@keyframes rightShow {
+    0%{
+        visibility: hidden; transform: translateZ(-200px);
+    }
+    50%{
+        transform: translateX(40%) rotateY(-30deg) scale(0.8);
+    }
+    100%{
+        visibility: visible;
+    }
+}
+@keyframes leftHide {
+    0%{
+        visibility: visible;
+    }
+    50%{
+        transform: translateX(-40%) rotateY(30deg) scale(0.8);
+    }
+    100%{
+        visibility: hidden; transform: translateZ(-200px);
+    }
+}
+@keyframes leftShow {
+    0%{
+        visibility: hidden; transform: translateZ(-200px);
+    }
+    50%{
+        transform: translateX(-40%) rotateY(30deg) scale(0.8);
+    }
+    100%{
+        visibility: visible;
+    }
+}
+@keyframes rightHide {
+    0%{
+        visibility: visible;
+    }
+    50%{
+        transform: translateX(40%) rotateY(-30deg) scale(0.8);
+    }
+    100%{
+        visibility: hidden; transform: translateZ(-200px);
+    }
 }
