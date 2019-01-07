@@ -8,6 +8,10 @@ window.onload=function () {
     var content=document.querySelector('.content');
     //求出content区域的高度
     var contentHeight=content.offsetHeight;
+    
+    var teamPersonNode=document.querySelector('.team-person');
+    var teamLisNodes=document.querySelectorAll('.team-person li');
+
     //定义
     var num=0;
     var timer=null;
@@ -111,7 +115,7 @@ window.onresize=function () {
                homePoint[i].index=i;
 
             homePoint[i].onclick=function () {
-
+                  //函数节流
                   var nowTime=Date.now();
                   if(nowTime-lastTime<=2000) return;
                    lastTime=nowTime;
@@ -139,6 +143,7 @@ window.onresize=function () {
         function autoPlay() {
             timer=setInterval(function () {
                 nowNum++;
+                lastTime = Date.now();
                 if (nowNum>=4){
                     nowNum=0;
                 }
@@ -152,5 +157,91 @@ window.onresize=function () {
 
     }
 
+   //第五屏js事件
+  lastViewHandle();
+  function lastViewHandle() {
+    var width = teamLisNodes[0].offsetWidth;
+    var height = teamLisNodes[0].offsetHeight;
+    var canvas = null;
+    var timer1=null;
+    var timer2=null;
+    for (var i = 0; i <teamLisNodes .length; i++) {
+          teamLisNodes[i].index=i;
+      teamLisNodes[i].onmouseenter=function () {
+        for (var j = 0; j < teamLisNodes.length; j++) {
+          teamLisNodes[j].style.opacity=0.5;
+        }
+        this.style.opacity=1;
+        if(!canvas){
+          canvas=document.createElement('canvas');
+          canvas.width=width;
+          canvas.height=height;
+          canvas.className='canvas';
+          bubble(canvas);
+          teamPersonNode.appendChild(canvas);
+        }
+        //不管添不添加canvas，都得改变left值
+        canvas.style.left = this.index * width + 'px';
+      };
+      
+    }
+    teamPersonNode.onmouseleave=function () {
+      for (var j = 0; j <teamLisNodes .length; j++) {
+          teamLisNodes[j].style.opacity=1;
+      }
+      canvas.remove();
+      canvas=null;
+      clearInterval(timer1);
+      clearInterval(timer2);
+    };
 
+
+    function bubble(canvas) {
+      if(canvas.getContext){
+        var patting=canvas.getContext('2d');
+        var arr=[];
+        timer1=setInterval(function () {
+          var r=Math.round(Math.random()*255);
+          var g=Math.round(Math.random()*255);
+          var b=Math.round(Math.random()*255);
+          var c_r=Math.round(Math.random()*8+2);
+          var y=canvas.height+c_r;
+          var x=Math.round(Math.random()*canvas.width);
+          var s=Math.round(Math.random()*30+20);
+          arr.push({
+            r:r,
+            g:g,
+            b:b,
+            c_r:c_r,
+            x:x,
+            y:y,
+            deg:0,
+            s:s
+          })
+
+        },50);
+        timer2=setInterval(function () {
+          patting.clearRect(0,0,canvas.width,canvas.height);
+          for (var i = 0; i <arr .length; i++) {
+            var item=arr[i];
+            item.deg+=4;
+            var rad=item.deg*Math.PI/180;
+
+            var x=item.x+Math.sin(rad)*item.s;
+            var y=item.y-rad*item.s;
+            if (y<=-item.c_r){
+              arr.splice(i,1);
+              continue;
+            }
+            patting.fillStyle='rgb('+item.r+','+item.g+','+item.b+')';
+            patting.beginPath();
+            patting.arc(x,y,item.c_r,0,2*Math.PI);
+            patting.fill();
+          }
+
+        },1000/60)
+
+      }
+    }
+  }
 };

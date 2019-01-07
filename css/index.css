@@ -449,6 +449,9 @@ img{display: block;}
     background-image: url("../img/greenLine.png");
     background-repeat: no-repeat;
 }
+.team{
+    position: relative;
+}
 .team-tittle{
     float: left;
     margin: 50px;
@@ -459,5 +462,57 @@ img{display: block;}
     margin: 50px;
     width: 400px;
 }
+.team-person{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 230px;
+    margin: 0 auto;
+    width: 944px;
+    height: 448px;
+}
+.team-person li{
+    float: left;
+    width: 236px;
+    background-image: url("../img/team.png");
+    background-repeat: no-repeat;
+    height: 100%;
+    opacity: 1;
+}
+.team-person li:nth-child(1){
+    background-position: 3px 0px;
+}
+.team-person li:nth-child(2){
+    background-position: -230px 0px;
+}
+.team-person li:nth-child(3){
+    background-position: -483px 0px;
+}
+.team-person li:nth-child(4){
+    background-position: -710px 0px;
+}
+.canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.navBar {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
+.navBar li {
+    width: 15px;
+    height: 15px;
+    border: 1px solid white;
+    border-radius: 50%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.navBar .active {
+    background: white;
+}
 

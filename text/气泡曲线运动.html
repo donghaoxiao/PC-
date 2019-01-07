@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: grey;
+        }
+        #mycanvas{
+            position: absolute;
+            left: 0;
+            top:0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+<canvas id="mycanvas" width="150" height="400"></canvas>
+</body>
+<script type="text/javascript">
+  window.onload = function () {
+      var canvas=document.getElementById('mycanvas');
+      var arr=[];
+      if(canvas.getContext){
+        var patting=canvas.getContext('2d');
+        setInterval(function () {
+          var r=Math.round(Math.random()*255);
+          var g=Math.round(Math.random()*255);
+          var b=Math.round(Math.random()*255);
+          var c_r=Math.round(Math.random()*8+2);
+          var y=canvas.height+c_r;
+          var x=Math.round(Math.random()*canvas.width);
+          var s=Math.round(Math.random()*30+20);
+          arr.push({
+            r:r,
+            g:g,
+            b:b,
+            c_r:c_r,
+            x:x,
+            y:y,
+            deg:0,
+            s:s
+          })
+
+        },50);
+        setInterval(function () {
+          patting.clearRect(0,0,canvas.width,canvas.height);
+          for (var i = 0; i <arr .length; i++) {
+            var item=arr[i];
+            item.deg+=4;
+            var rad=item.deg*Math.PI/180;
+
+            var x=item.x+Math.sin(rad)*item.s;
+            var y=item.y-rad*item.s;
+            if (y<=-item.c_r){
+              arr.splice(i,1);
+              continue;
+            }
+            patting.fillStyle='rgb('+item.r+','+item.g+','+item.b+')';
+            patting.beginPath();
+            patting.arc(x,y,item.c_r,0,2*Math.PI);
+            patting.fill();
+          }
+
+        },1000/60)
+
+      }
+  }
+</script>
+</html>
