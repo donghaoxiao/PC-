@@ -26,7 +26,7 @@ window.onload=function () {
              };
          };
      };
-
+    move(4);
      function move(num){
 
              for (var j = 0; j <headerdownNodes .length; j++) {
